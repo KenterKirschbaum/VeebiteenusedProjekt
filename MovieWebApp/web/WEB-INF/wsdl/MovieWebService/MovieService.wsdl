@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+	xmlns:tns="http://www.ttu.ee/idu0075/2017/ws/movie" 
+	targetNamespace="http://www.ttu.ee/idu0075/2017/ws/movie">
+	<wsdl:types>
+		<xs:schema  targetNamespace="http://www.ttu.ee/idu0075/2017/ws/movie" elementFormDefault="qualified">
+            
+			<xs:complexType name ="movieType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="director" type="xs:string" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="releaseYear" type="xs:integer"/>
+                    <xs:element name="actors" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+            
+			<xs:complexType name ="genreMoviesType">
+				<xs:sequence>
+					<xs:element name="movie" type="tns:movieType"/>
+				</xs:sequence>
+			</xs:complexType>
+            
+			<xs:complexType name ="genreMoviesListType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="genreMovies" type="tns:genreMoviesType"/>
+				</xs:sequence>
+			</xs:complexType>
+            
+			<xs:complexType name ="genreType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+                    <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				    <xs:element name="genreName" minOccurs="1">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:pattern value="Action|Horror|Comedy"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+                    <xs:element name="genreMoviesList" type="tns:genreMoviesListType"/>
+				</xs:sequence>
+			</xs:complexType>
+            
+			<xs:element name="getMovieRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            
+			<xs:element name="getMovieResponse" type="tns:movieType"/>
+            
+			<xs:element name="addMovieRequest">
+				<xs:complexType>
+					<xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+					    <xs:element name="name" type="xs:string"/>
+					    <xs:element name="director" type="xs:string" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="releaseYear" type="xs:integer"/>
+                        <xs:element name="actors" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            
+			<xs:element name="addMovieResponse" type="tns:movieType"/>
+            
+			<xs:element name="getMovieListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+                        <xs:element name="releaseYear" type="xs:integer"/>
+                        <xs:element name="name" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            
+			<xs:element name="getMovieListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="movie" type="tns:movieType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            
+			<xs:element name="getGenreRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            
+			<xs:element name="getGenreResponse" type="tns:genreType"/>
+            
+			<xs:element name="addGenreRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+                        <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+				        <xs:element name="genreName" minOccurs="1">
+						  <xs:simpleType>
+							 <xs:restriction base="xs:string">
+								    <xs:pattern value="Action|Horror|Comedy"/>
+							</xs:restriction>
+						  </xs:simpleType>
+					   </xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>    
+            
+			<xs:element name="addGenreResponse" type="tns:genreType"/>
+            
+			<xs:element name="getGenreListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            
+			<xs:element name="getGenreListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="genre" type="tns:genreType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+            
+			<xs:element name="getgenreMoviesListRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="genreId" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getgenreMoviesListResponse" type="tns:genreMoviesListType"/>
+            <xs:element name="addgenreMoviesRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="movieId" type="xs:integer"/>
+                        <xs:element name="genreId" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+      
+            <xs:element name="addgenreMoviesResponse" type="tns:genreMoviesType"/>
+        </xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getMovieMessageRequest">
+		<wsdl:part name="parameter" element="tns:getMovieRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getMovieMessageResponse">
+		<wsdl:part name="parameter" element="tns:getMovieResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addMovieMessageRequest">
+		<wsdl:part name="parameter" element="tns:addMovieRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addMovieMessageResponse">
+		<wsdl:part name="parameter" element="tns:addMovieResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getMovieListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getMovieListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getMovieListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getMovieListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getGenreMessageRequest">
+		<wsdl:part name="parameter" element="tns:getGenreRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getGenreMessageResponse">
+		<wsdl:part name="parameter" element="tns:getGenreResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addGenreMessageRequest">
+		<wsdl:part name="parameter" element="tns:addGenreRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addGenreMessageResponse">
+		<wsdl:part name="parameter" element="tns:addGenreResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getGenreListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getGenreListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getGenreListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getGenreListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getgenreMoviesListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getgenreMoviesListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getgenreMoviesListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getgenreMoviesListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addgenreMoviesMessageRequest">
+		<wsdl:part name="parameter" element="tns:addgenreMoviesRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addgenreMoviesMessageResponse">
+		<wsdl:part name="parameter" element="tns:addgenreMoviesResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="MoviePortType">
+        
+		<wsdl:operation name="getMovie">
+			<wsdl:input message="tns:getMovieMessageRequest"/>
+			<wsdl:output message="tns:getMovieMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addMovie">
+			<wsdl:input message="tns:addMovieMessageRequest"/>
+			<wsdl:output message="tns:addMovieMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getMovieList">
+			<wsdl:input message="tns:getMovieListMessageRequest"/>
+			<wsdl:output message="tns:getMovieListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getGenre">
+			<wsdl:input message="tns:getGenreMessageRequest"/>
+			<wsdl:output message="tns:getGenreMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addGenre">
+			<wsdl:input message="tns:addGenreMessageRequest"/>
+			<wsdl:output message="tns:addGenreMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getGenreList">
+			<wsdl:input message="tns:getGenreListMessageRequest"/>
+			<wsdl:output message="tns:getGenreListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getgenreMoviesList">
+			<wsdl:input message="tns:getgenreMoviesListMessageRequest"/>
+			<wsdl:output message="tns:getgenreMoviesListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addgenreMovies">
+			<wsdl:input message="tns:addgenreMoviesMessageRequest"/>
+			<wsdl:output message="tns:addgenreMoviesMessageResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="MovieBinding" type="tns:MoviePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getMovie">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addMovie">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getMovieList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		<wsdl:operation name="getGenre">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addGenre">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getGenreList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>	
+		<wsdl:operation name="getgenreMoviesList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addgenreMovies">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="MovieService">
+		<wsdl:port name="MoviePort" binding="tns:MovieBinding">
+			<soap:address location="Empty"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

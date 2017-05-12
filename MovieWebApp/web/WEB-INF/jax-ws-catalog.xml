@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/kente_000/Desktop/TTÜ/4.semester/Veebiteenused/Projekt/MovieService.wsdl" uri="src/conf/xml-resources/web-services/MovieWebService/wsdl/MovieService.wsdl"/>
+    <system systemId="http://kenter:8080/MovieWebApp/MovieService?wsdl" uri="wsdl/kenter_8080/MovieWebApp/MovieService.wsdl"/>
+</catalog>

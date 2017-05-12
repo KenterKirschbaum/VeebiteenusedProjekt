@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="2fdef17c-681b-4c15-948b-8f394229d903" activeEnvironment="Default" name="MovieService?wsdl" soapui-version="5.3.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="1c1989ce-b417-40e1-b8e2-d953d4002d5d" wsaVersion="NONE" name="MovieBinding" type="wsdl" bindingName="{http://www.ttu.ee/idu0075/2017/ws/movie}MovieBinding" soapVersion="1_1" anonymous="optional" definition="http://kenter:8080/MovieWebApp/MovieService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://kenter:8080/MovieWebApp/MovieService?wsdl"><con:part><con:url>http://kenter:8080/MovieWebApp/MovieService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.ttu.ee/idu0075/2017/ws/movie" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/2017/ws/movie">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ttu.ee/idu0075/2017/ws/movie" elementFormDefault="qualified">
+      <xs:complexType name="movieType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="director" type="xs:string" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="releaseYear" type="xs:integer"/>
+          <xs:element name="actors" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="genreMoviesType">
+        <xs:sequence>
+          <xs:element name="movie" type="tns:movieType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="genreMoviesListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="genreMovies" type="tns:genreMoviesType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="genreType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="genreName" minOccurs="1">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="Action|Horror|Comedy"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="genreMoviesList" type="tns:genreMoviesListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getMovieRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMovieResponse" type="tns:movieType"/>
+      <xs:element name="addMovieRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="director" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="releaseYear" type="xs:integer"/>
+            <xs:element name="actors" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addMovieResponse" type="tns:movieType"/>
+      <xs:element name="getMovieListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="releaseYear" type="xs:integer"/>
+            <xs:element name="name" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMovieListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="movie" type="tns:movieType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getGenreRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getGenreResponse" type="tns:genreType"/>
+      <xs:element name="addGenreRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="genreName" minOccurs="1">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="Action|Horror|Comedy"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addGenreResponse" type="tns:genreType"/>
+      <xs:element name="getGenreListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getGenreListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="genre" type="tns:genreType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getgenreMoviesListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="genreId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getgenreMoviesListResponse" type="tns:genreMoviesListType"/>
+      <xs:element name="addgenreMoviesRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="movieId" type="xs:integer"/>
+            <xs:element name="genreId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addgenreMoviesResponse" type="tns:genreMoviesType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getMovieMessageRequest">
+    <wsdl:part name="parameter" element="tns:getMovieRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getMovieMessageResponse">
+    <wsdl:part name="parameter" element="tns:getMovieResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addMovieMessageRequest">
+    <wsdl:part name="parameter" element="tns:addMovieRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addMovieMessageResponse">
+    <wsdl:part name="parameter" element="tns:addMovieResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getMovieListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getMovieListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getMovieListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getMovieListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getGenreMessageRequest">
+    <wsdl:part name="parameter" element="tns:getGenreRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getGenreMessageResponse">
+    <wsdl:part name="parameter" element="tns:getGenreResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addGenreMessageRequest">
+    <wsdl:part name="parameter" element="tns:addGenreRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addGenreMessageResponse">
+    <wsdl:part name="parameter" element="tns:addGenreResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getGenreListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getGenreListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getGenreListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getGenreListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getgenreMoviesListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getgenreMoviesListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getgenreMoviesListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getgenreMoviesListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addgenreMoviesMessageRequest">
+    <wsdl:part name="parameter" element="tns:addgenreMoviesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addgenreMoviesMessageResponse">
+    <wsdl:part name="parameter" element="tns:addgenreMoviesResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="MoviePortType">
+    <wsdl:operation name="getMovie">
+      <wsdl:input message="tns:getMovieMessageRequest"/>
+      <wsdl:output message="tns:getMovieMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addMovie">
+      <wsdl:input message="tns:addMovieMessageRequest"/>
+      <wsdl:output message="tns:addMovieMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getMovieList">
+      <wsdl:input message="tns:getMovieListMessageRequest"/>
+      <wsdl:output message="tns:getMovieListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getGenre">
+      <wsdl:input message="tns:getGenreMessageRequest"/>
+      <wsdl:output message="tns:getGenreMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addGenre">
+      <wsdl:input message="tns:addGenreMessageRequest"/>
+      <wsdl:output message="tns:addGenreMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getGenreList">
+      <wsdl:input message="tns:getGenreListMessageRequest"/>
+      <wsdl:output message="tns:getGenreListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getgenreMoviesList">
+      <wsdl:input message="tns:getgenreMoviesListMessageRequest"/>
+      <wsdl:output message="tns:getgenreMoviesListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addgenreMovies">
+      <wsdl:input message="tns:addgenreMoviesMessageRequest"/>
+      <wsdl:output message="tns:addgenreMoviesMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MovieBinding" type="tns:MoviePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getMovie">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addMovie">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMovieList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGenre">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addGenre">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGenreList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getgenreMoviesList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addgenreMovies">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MovieService">
+    <wsdl:port name="MoviePort" binding="tns:MovieBinding">
+      <soap:address location="http://kenter:8080/MovieWebApp/MovieService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint></con:endpoints><con:operation id="3a58a9ae-a979-47a2-8d18-18b2c867b719" isOneWay="false" action="" name="addGenre" bindingOperationName="addGenre" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="86538509-73f2-43ac-bbc4-a4f16c943103" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:addGenreRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <!--Optional:-->\r
+         <mov:description>?</mov:description>\r
+         <mov:genreName>Action</mov:genreName>\r
+      </mov:addGenreRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/addGenreRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="6308f8d4-e009-46ba-853a-3049d182c4a4" isOneWay="false" action="" name="addgenreMovies" bindingOperationName="addgenreMovies" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="31825d04-98de-493c-8ef5-6b7f59e26071" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:addgenreMoviesRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:movieId>1</mov:movieId>\r
+         <mov:genreId>1</mov:genreId>\r
+      </mov:addgenreMoviesRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/addgenreMoviesRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9907d663-0489-418e-8256-e32471af585e" isOneWay="false" action="" name="addMovie" bindingOperationName="addMovie" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="efa34f07-acf9-4b1e-a870-bd49eba199e0" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:addMovieRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:name>Hush</mov:name>\r
+         <!--Optional:-->\r
+         <mov:director>Naine</mov:director>\r
+         <mov:releaseYear>2016</mov:releaseYear>\r
+         <mov:actors>Jack</mov:actors>\r
+      </mov:addMovieRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/addMovieRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="708b5d97-e328-4778-9cd1-21a4cd16f16c" isOneWay="false" action="" name="getGenre" bindingOperationName="getGenre" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c9ac4a04-c56f-482c-a7e7-b69c540e5945" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getGenreRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:id>1</mov:id>\r
+      </mov:getGenreRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getGenreRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="65191046-870f-476b-8219-a7f572c2b89d" isOneWay="false" action="" name="getGenreList" bindingOperationName="getGenreList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2d887adb-21a4-47c4-8dc4-5c1bd7f75d5a" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getGenreListRequest>\r
+         <mov:token>salajane</mov:token>\r
+      </mov:getGenreListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getGenreListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="79539fb6-c845-4b05-bbb5-6768aa9206d4" isOneWay="false" action="" name="getgenreMoviesList" bindingOperationName="getgenreMoviesList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="369772bb-5c73-4f93-87e0-e4b72688fce9" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getgenreMoviesListRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:genreId>1</mov:genreId>\r
+      </mov:getgenreMoviesListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getgenreMoviesListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="ddf562c2-dfc4-4fe2-8e35-22d21bacf97c" isOneWay="false" action="" name="getMovie" bindingOperationName="getMovie" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="fafcb58e-3db6-4bc0-be46-01e30492beb0" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getMovieRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:id>1</mov:id>\r
+      </mov:getMovieRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getMovieRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="10b5205d-97c4-4606-943e-831ef785bf38" isOneWay="false" action="" name="getMovieList" bindingOperationName="getMovieList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="48b6abe3-6f80-4a81-be56-ce3ea044d6ca" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getMovieListRequest>\r
+         <mov:token>?</mov:token>\r
+         <mov:releaseYear>?</mov:releaseYear>\r
+         <mov:name>?</mov:name>\r
+      </mov:getMovieListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getMovieListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="7df2e358-1ce0-416f-82fb-b4d7044adc5d" name="MovieBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="0f1c819c-9825-4d96-a30f-53aaee92dbf8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addGenre TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="4736eae0-17f8-4e82-abb6-a401aa2e77f9" name="addGenre"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>addGenre</con:operation><con:request name="addGenre" id="dc0b2971-d8ee-406b-b559-7d7bd930fb4f"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:addGenreRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <!--Optional:-->\r
+         <mov:description>?</mov:description>\r
+         <mov:genreName>Comedy</mov:genreName>\r
+      </mov:addGenreRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="0f4ce242-3ed0-47f6-9413-e51c3889693f" name="Schema Compliance"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/addGenreRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="fa8990c0-7ff3-4989-a19d-d14339ae1b3a" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addgenreMovies TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="92453c15-1360-429a-85de-fc3625d3d123" name="addgenreMovies"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>addgenreMovies</con:operation><con:request name="addgenreMovies" id="a887002f-8f40-47b7-a44a-27e68003047c"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:addgenreMoviesRequest>\r
+         <mov:token>?</mov:token>\r
+         <mov:movieId>?</mov:movieId>\r
+         <mov:genreId>?</mov:genreId>\r
+      </mov:addgenreMoviesRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="098041db-2e78-4c98-aa8d-86e4a7da89e3" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/addgenreMoviesRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="c7189242-c8aa-4c18-b893-679b9bf5920f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addMovie TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="dfd2a890-e509-4de9-9fe0-15987a0e205d" name="addMovie"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>addMovie</con:operation><con:request name="addMovie" id="2647812f-3835-4447-829e-ec40d49fb191"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:addMovieRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:name>nimi</mov:name>\r
+         <!--Optional:-->\r
+         <mov:director>?</mov:director>\r
+         <mov:releaseYear>2915</mov:releaseYear>\r
+         <mov:actors>Rass</mov:actors>\r
+      </mov:addMovieRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="6340f3f6-d41f-4e39-b5b4-60ea5721e09f" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="b454e9df-0a8e-45ac-b012-9c510f2738a9" name="XPath Match"><con:configuration/></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/addMovieRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="e215d90f-a07f-47bc-b7b3-f8612e1e6558" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getGenre TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="95aac2fb-85be-45c6-acda-dff742146a7a" name="getGenre"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>getGenre</con:operation><con:request name="getGenre" id="b44f0b4b-861e-4bf6-8208-e3cb6712629d"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getGenreRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:id>1</mov:id>\r
+      </mov:getGenreRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="be05a688-6772-4b60-9aab-52e9d34ea8ff" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getGenreRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d2da8132-b521-42e0-b3aa-4dd02780f43d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getGenreList TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="5f289907-7696-4e77-a713-b6c517927f1e" name="getGenreList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>getGenreList</con:operation><con:request name="getGenreList" id="3f15015e-b5c3-4363-b72f-3699e18a53df"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getGenreListRequest>\r
+         <mov:token>salajane</mov:token>\r
+      </mov:getGenreListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="9f94d637-69a5-4910-ba28-cc6643a47bd0" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getGenreListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="3f98d038-5bef-4005-980a-030391f1bd58" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getgenreMoviesList TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="297ae3bf-97c8-4c64-b1ff-2a188c649244" name="getgenreMoviesList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>getgenreMoviesList</con:operation><con:request name="getgenreMoviesList" id="95e8c191-2e3a-4669-a3d6-a6834f024e43"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getgenreMoviesListRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:genreId>1</mov:genreId>\r
+      </mov:getgenreMoviesListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="54e19a57-dc2d-422a-afb2-9c0072243909" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getgenreMoviesListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="f2cd6910-6dee-4cc5-819e-efd41387487d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getMovie TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="a9ddb3e3-e56e-476f-a823-59f10965524d" name="getMovie"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>getMovie</con:operation><con:request name="getMovie" id="7644949c-b5ac-4d0d-8a9c-a7bac885e006"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getMovieRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:id>1</mov:id>\r
+      </mov:getMovieRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="392cf531-2f1c-4cba-a76d-e044f58b9c81" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getMovieRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="f861c40d-0e37-4c8e-b824-15d23b9e7cce" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getMovieList TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="908647f2-55bc-448a-ab0e-133aa03ee356" name="getMovieList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MovieBinding</con:interface><con:operation>getMovieList</con:operation><con:request name="getMovieList" id="8d62b983-ec20-441d-8bfd-98584b418789"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://kenter:8080/MovieWebApp/MovieService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mov="http://www.ttu.ee/idu0075/2017/ws/movie">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mov:getMovieListRequest>\r
+         <mov:token>salajane</mov:token>\r
+         <mov:releaseYear>2915</mov:releaseYear>\r
+         <mov:name>nimi</mov:name>\r
+      </mov:getMovieListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="674279c5-4828-4f2b-8e0d-5e52193f6c7f" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2017/ws/movie/MoviePortType/getMovieListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
