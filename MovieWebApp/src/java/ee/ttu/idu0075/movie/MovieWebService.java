@@ -95,6 +95,7 @@ public class MovieWebService {
             
             gt.setId(BigInteger.valueOf(nextGenreId++));
             gt.setGenreName(parameter.getGenreName());
+            gt.setGenreMoviesList(new GenreMoviesListType());
             genreList.add(gt);
             }
         }

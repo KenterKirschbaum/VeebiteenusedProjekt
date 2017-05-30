@@ -143,9 +143,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            
             <xs:element name="getgenreMoviesListResponse" type="tns:genreMoviesListType"/>
-            
             <xs:element name="addgenreMoviesRequest">
                 <xs:complexType>
                     <xs:sequence>
@@ -157,7 +155,6 @@
             </xs:element>
       
             <xs:element name="addgenreMoviesResponse" type="tns:genreMoviesType"/>
-            
         </xs:schema>
 	</wsdl:types>
 	<wsdl:message name="getMovieMessageRequest">
