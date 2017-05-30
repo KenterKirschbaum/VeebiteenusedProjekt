@@ -1,0 +1,235 @@
+{
+	"variables": [],
+	"info": {
+		"name": "MovieRestTests",
+		"_postman_id": "a27d6bf1-3ffd-2d0c-c22a-87094c767821",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/movies/1/?token=salajane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"Cibo\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/movies/1/?token=salajane",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/movies/?token=salajane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"Halo\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/movies/?token=salajane",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 3,\n\t\"name\": \"Halo\",\n\t\"director\": null,\n\t\"releaseYear\": 2014,\n\t\"actors\": \"Daniel\"\n}\n\t"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/movies/?token=salajane&releaseYear=2016&name=Cibo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"2016\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/movies/?token=salajane&releaseYear=2016&name=Cibo",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/genres/1/?token=salajane ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"Vivo\");",
+							"",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/genres/1/?token=salajane ",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/genres/?token=salajane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"Horror\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/genres/?token=salajane",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 2,\n\t\"description\": \"Kõige õudsam\",\n\t\"genreName\": \"Horror\",\n\t\"genreMoviesList\": null\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/genres/?token=salajane ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"Action\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/genres/?token=salajane ",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/genres/1/movies/?token=salajane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"Tyler\");",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/genres/1/movies/?token=salajane",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://kenter:8080/MovieWebApp/webresources/genres/1/movies/2/?token=salajane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Body matches string\"] = responseBody.has(\"2016\");",
+							"",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://kenter:8080/MovieWebApp/webresources/genres/1/movies/2/?token=salajane",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
